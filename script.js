@@ -30,7 +30,22 @@ let GameManager=(function(){
 
  }
 
- return {gameBoard,play};
+function restart(){
+for (let i = 0; i < 3; i++) {
+   for (let x = 0; x < 3; x++) {
+
+    GameManager.gameBoard[i][x]='_';
+    
+   }
+    
+}
+
+
+
+
+}
+
+ return {gameBoard,play,restart};
     }
 
 
@@ -98,6 +113,8 @@ let selection=(row=1,column=1)=>{
 
 };
 
+
+
 let Engange=function(row,column){
     var positonsFilled=0;
     selection(row,column);
@@ -110,13 +127,21 @@ let Engange=function(row,column){
 
                 positonsFilled++;
                 if(positonsFilled>2&&positonsFilled<9){
+                    (Move.DertimineWinner());
+                   let playStatus=Move.DertimineWinner();
+                 console.log(playStatus);
+                  
+                   if(!((playStatus.WinnerStatus)===undefined)){
 
-                    Move.DertimineWinner();
+                    cacheDom.printOut(playStatus.WinnerStatus,playStatus.mark);
+                    
+                   
+                   }
                 }
                 else if(positonsFilled>8){
 
-                    alert("basi Man")
-
+                    cacheDom.printOut("Its A Tie");
+                    
                 }
 
             }
@@ -147,8 +172,11 @@ for (let i = 0; i <3; i++) {
 
         if (!(GameManager.gameBoard[i][0]==="_")) {
 
-            console.log("Winner is "+GameManager.gameBoard[i][0])
-            return;
+            let mark=GameManager.gameBoard[i][0];
+            let WinnerStatus="Winner is "+GameManager.gameBoard[i][0];
+            
+            return {mark,WinnerStatus};
+            
         }
 
       }
@@ -164,7 +192,9 @@ for (let i = 0; i <3; i++) {
         console.log("===>"+GameManager.gameBoard[i][0])
       if (!(GameManager.gameBoard[0][i]==="_")) {
 
-          console.log("Winner is "+GameManager.gameBoard[1][i])
+        let mark=GameManager.gameBoard[1][i];
+        let WinnerStatus="Winner is "+GameManager.gameBoard[1][i];
+          return{mark,WinnerStatus};
           
       }
 
@@ -178,7 +208,10 @@ if ((GameManager.gameBoard[0][0]===GameManager.gameBoard[1][1])&&(GameManager.ga
 
     if (!(GameManager.gameBoard[0][0]==="_")) {
 
-        console.log("Winner is "+GameManager.gameBoard[0][0])
+        let mark=GameManager.gameBoard[0][0];
+        let WinnerStatus="Winner is "+GameManager.gameBoard[0][0];
+          return{mark,WinnerStatus};
+
         
     }
 
@@ -186,16 +219,26 @@ if ((GameManager.gameBoard[0][0]===GameManager.gameBoard[1][1])&&(GameManager.ga
 } else if ((GameManager.gameBoard[0][2]===GameManager.gameBoard[1][1])&&(GameManager.gameBoard[0][2]===GameManager.gameBoard[2][0]))  {
     if (!(GameManager.gameBoard[0][2]==="_")) {
 
-        console.log("Winner is "+GameManager.gameBoard[0][2])
+        let mark=GameManager.gameBoard[0][2];
+        let WinnerStatus="Winner is "+GameManager.gameBoard[0][2];
+          return{mark,WinnerStatus};
+
+       
         
     }
 }
 
-
+return {mark:undefined,WinnerStatus:undefined}
 })
 
-return {selection,Engange,DertimineWinner}    
+return {Engange,DertimineWinner}    
 })();
+
+
+
+
+
+
 
 
 let cacheDom=(()=>{
@@ -224,16 +267,13 @@ let setMaker=(()=>{
                 square.classList.add('square');
                 square.id="square";
                 box.append(square);
-                square.textContent="Drizzy"+i+x;
+                square.textContent="   ";
                 square.disabled=0;
                 let value=positionButton(i,x,square);
                 
                 square.addEventListener('click',(e)=>{
                     
-                 Move.Engange(value.row,value.column)
-                 square.textContent=GameManager.gameBoard[value.row][value.column];
-                 console.log(GameManager.gameBoard);
-                 square.disabled=1;
+                 ManipulateSquare(value.row,value.column,square);
 
                 })
               
@@ -248,11 +288,63 @@ let setMaker=(()=>{
 
 })();
 
+function ManipulateSquare(row,column,square){
 
 
 
+    Move.Engange(row,column)
+                 square.textContent=GameManager.gameBoard[row][column];
+                 console.log(GameManager.gameBoard);
+                 square.disabled=true;
+            
+
+}
+
+let result=(()=>{
+
+    let dialog=document.querySelector('dialog');
+    let collectButton=document.querySelectorAll('#square');
+
+    
+    let TryAgain=document.querySelector('#TryAgain');
+    
+    TryAgain.addEventListener('click',function(e){
+    
+    GameManager.restart();
+    dialog.close();
+    cleanUp(collectButton);
+    
+    })
+    
+    return{dialog};
+    })();
 
 
+function printOut(words,mark) {
+     
+    
+    let text=document.querySelector('p');
+    result.dialog.showModal();
+    text.textContent=words;
+
+   
+
+
+}
+
+function cleanUp(buttons){
+
+ for (let i = 0; i < buttons.length; i++) {
+ buttons[i].textContent=" ";
+    buttons[i].disabled=false;
+ }
+
+
+}
+
+
+
+return{printOut}
 })();
 
 

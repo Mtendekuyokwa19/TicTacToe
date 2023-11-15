@@ -6,24 +6,35 @@ display: flex;
 justify-content: center;
 align-items: center;
 height: 98vh;
-border:solid 1px blue;
+
 width: 98vw;
+background-color: #262c36;
 
-
+color: white;
 }
 
 .board{
 
     width: 400px;
     height: 400px;
-    border: solid red 2px;
+   
     display: grid;
     grid-template-columns: repeat(3,1fr);
     grid-template-rows: repeat(3,1fr);
-
+    background-color: #334e68;
+    box-shadow: 12px 12px 30px rgb(27, 26, 26);
 
 
 
 }
 
-.board button
+.board button{
+    background-color: #334e68;
+    font-size: 56px;
+    outline: none;
+    border: 2px solid #576776;
+    border-radius: 7px;
+    font-weight: 900;
+
+
+}
