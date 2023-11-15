@@ -98,35 +98,36 @@ let selection=(row=1,column=1)=>{
 
 };
 
-let Engange=function(){
+let Engange=function(row,column){
+    var positonsFilled=0;
+    selection(row,column);
 
-    // for (let i = 0; i <9; i++) {
+    for (let i = 0; i < 3; i++) {
+        for (let x = 0; x < 3; x++) {
+            if(GameManager.gameBoard[i][x]==="X"||GameManager.gameBoard[i][x]==="O"){
+
+                positonsFilled++;
+
+            }
+            
+        }
+        
+    } 
+        if(positonsFilled>2){
+
+            Move.DertimineWinner();
+        }
        
-        Move.selection(0,0);
-
-        Move.selection(1,1);
-       
-        Move.selection(0,1);
-
-        Move.selection(0,2);
-       
-
-        Move.selection(1,2);
-        Move.selection(1,0);
-        Move.selection(2,1);
       
-        Move.selection(2,0);
-       
-       return Move.Winner();
         
         
-    // }
+   
 
 
 }
 
-
-let Winner=(()=>{
+//fix this
+let DertimineWinner=(()=>{
 
     for (let i = 0; i <3; i++) {
 
@@ -134,7 +135,7 @@ let Winner=(()=>{
         
         if ((GameManager.gameBoard[i][0]===GameManager.gameBoard[i][1])&&GameManager.gameBoard[i][0]===GameManager.gameBoard[i][2]) {
             
-                alert("WInner is "+GameManager.gameBoard[i][1])
+                console.log("WInner is "+GameManager.gameBoard[i][1])
 
                 return;
 
@@ -150,7 +151,7 @@ let Winner=(()=>{
        
         if ((GameManager.gameBoard[0][i]===GameManager.gameBoard[1][i])&&GameManager.gameBoard[0][i]===GameManager.gameBoard[2][i]){
             
-                alert("HAHAHA is "+GameManager.gameBoard[0][i])
+                console.log("HAHAHA is "+GameManager.gameBoard[0][i])
 
                 return;
 
@@ -191,12 +192,65 @@ if (count>8) {
 
 })
 
-return {selection,Engange,Winner}    
+return {selection,Engange,DertimineWinner}    
 })();
 
-console.log(GameManager.gameBoard);
 
-Move.Engange();
+let cacheDom=(()=>{
+
+let positionButton=(row,column,button)=>{
+
+    let getCordinates=()=>{
+        let xCordinate=row;
+        let yCordinate=column;
+        return {xCordinate,yCordinate}
+    }
+    
+
+    
+    return{row,column,button,getCordinates}
+}
+
+let setMaker=(()=>{
+    let box=document.querySelector(".board");
+
+        for ( i = 0; i <3; i++) {
+
+            for (let x = 0; x < 3; x++) {
+                
+                let square=document.createElement('button');
+                square.classList.add('square');
+                square.id="square";
+                box.append(square);
+                square.textContent="Drizzy"+i+x;
+                square.disabled=0;
+                let value=positionButton(i,x,square);
+                
+                square.addEventListener('click',(e)=>{
+                    
+                 Move.Engange(value.row,value.column)
+                 console.log(GameManager.gameBoard);
+                 square.disabled=1;
+
+                })
+              
+
+              
+                
+            }
+            
+        }
+
+
+
+})();
+
+
+
+
+
+
+})();
 
 
 
