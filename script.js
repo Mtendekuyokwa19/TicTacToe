@@ -101,22 +101,33 @@ let selection=(row=1,column=1)=>{
 let Engange=function(row,column){
     var positonsFilled=0;
     selection(row,column);
+ 
+ 
 
     for (let i = 0; i < 3; i++) {
         for (let x = 0; x < 3; x++) {
             if(GameManager.gameBoard[i][x]==="X"||GameManager.gameBoard[i][x]==="O"){
 
                 positonsFilled++;
+                if(positonsFilled>2&&positonsFilled<9){
+
+                    Move.DertimineWinner();
+                }
+                else if(positonsFilled>8){
+
+                    alert("basi Man")
+
+                }
 
             }
             
         }
-        
+   
     } 
-        if(positonsFilled>2){
+ 
 
-            Move.DertimineWinner();
-        }
+
+      
        
       
         
@@ -129,66 +140,57 @@ let Engange=function(row,column){
 //fix this
 let DertimineWinner=(()=>{
 
-    for (let i = 0; i <3; i++) {
-
-        console.log("we reached");
-        
-        if ((GameManager.gameBoard[i][0]===GameManager.gameBoard[i][1])&&GameManager.gameBoard[i][0]===GameManager.gameBoard[i][2]) {
-            
-                console.log("WInner is "+GameManager.gameBoard[i][1])
-
-                return;
-
-        } 
-        
-    }
-
-
-    for (let i = 0; i <3; i++) {
-
-        console.log("Richer");
-        
-       
-        if ((GameManager.gameBoard[0][i]===GameManager.gameBoard[1][i])&&GameManager.gameBoard[0][i]===GameManager.gameBoard[2][i]){
-            
-                console.log("HAHAHA is "+GameManager.gameBoard[0][i])
-
-                return;
-
-        } 
-        
-    }
-
-    if((GameManager.gameBoard[0][0]===GameManager.gameBoard[1][1])&&(GameManager.gameBoard[0][0]===GameManager.gameBoard[2][2])){
-
-        alert("HAHAHA is "+GameManager.gameBoard[0][0]);
-
-    }
-    else if((GameManager.gameBoard[0][2]===GameManager.gameBoard[1][1])&&(GameManager.gameBoard[0][2]===GameManager.gameBoard[2][0]))
-{
-    // console.log(s)
-    alert("HAHAHA is "+GameManager.gameBoard[0][2]);
-
-
-} 
-var count=0;
-for (let index = 0; index < 3; index++) {
-    for (let x = 0; x < 3; x++) {
-        if(GameManager.gameBoard[index][x]==="X"||GameManager.gameBoard[index][x]==="O"){
-
-            count++;
-
-        }
-        
-    }
-    
-}
-
-if (count>8) {
+    //the vertical move
+for (let i = 0; i <3; i++) {
   
-    alert("Its a tie");
+      if((GameManager.gameBoard[i][0]===GameManager.gameBoard[i][1])&&(GameManager.gameBoard[i][0]===GameManager.gameBoard[i][2])){
+
+        if (!(GameManager.gameBoard[i][0]==="_")) {
+
+            console.log("Winner is "+GameManager.gameBoard[i][0])
+            return;
+        }
+
+      }
+    
     
 }
+
+//the horizontal moves
+for (let i = 0; i <3; i++) {
+  
+    if((GameManager.gameBoard[0][i]===GameManager.gameBoard[1][i])&&(GameManager.gameBoard[0][i]===GameManager.gameBoard[2][i])){
+
+        console.log("===>"+GameManager.gameBoard[i][0])
+      if (!(GameManager.gameBoard[0][i]==="_")) {
+
+          console.log("Winner is "+GameManager.gameBoard[1][i])
+          
+      }
+
+    }
+  
+  
+}
+   
+//the crossectional move -neagtive line
+if ((GameManager.gameBoard[0][0]===GameManager.gameBoard[1][1])&&(GameManager.gameBoard[0][0]===GameManager.gameBoard[2][2])) {
+
+    if (!(GameManager.gameBoard[0][0]==="_")) {
+
+        console.log("Winner is "+GameManager.gameBoard[0][0])
+        
+    }
+
+   //the crossectional move -positive line 
+} else if ((GameManager.gameBoard[0][2]===GameManager.gameBoard[1][1])&&(GameManager.gameBoard[0][2]===GameManager.gameBoard[2][0]))  {
+    if (!(GameManager.gameBoard[0][2]==="_")) {
+
+        console.log("Winner is "+GameManager.gameBoard[0][2])
+        
+    }
+}
+
 
 })
 
@@ -197,7 +199,7 @@ return {selection,Engange,DertimineWinner}
 
 
 let cacheDom=(()=>{
-
+//move this to Move obj
 let positionButton=(row,column,button)=>{
 
     let getCordinates=()=>{
@@ -229,6 +231,7 @@ let setMaker=(()=>{
                 square.addEventListener('click',(e)=>{
                     
                  Move.Engange(value.row,value.column)
+                 square.textContent=GameManager.gameBoard[value.row][value.column];
                  console.log(GameManager.gameBoard);
                  square.disabled=1;
 
