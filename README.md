@@ -11,13 +11,15 @@ It is a game famously known as [tic-tac-toe](https://en.wikipedia.org/wiki/Tic-t
 
 ## Demo 🏃‍♂️
 
-Try out the game [here](www.google.com)
+Try out the game [here](https://mtendekuyokwa19.github.io/TicTacToe/)
 
 ## Features And Aspects 🎒
 
 1. ### Winner Status
-When a succeful connection is made A dialog message shows who Wown the Game.
+
 ![win](./readmePhotos/wininningStatus.png)
+
+- When a succeful connection is made A dialog message shows who Wown the Game.
 
 - The user can play multiple times by clicking the `play again ` option and can end the game by clicking `quit`
 
