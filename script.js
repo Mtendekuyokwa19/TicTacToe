@@ -118,7 +118,7 @@ let selection=(row=1,column=1)=>{
 let Engange=function(row,column){
     var positonsFilled=0;
     selection(row,column);
- 
+    
  
 
     for (let i = 0; i < 3; i++) {
@@ -134,6 +134,8 @@ let Engange=function(row,column){
                    if(!((playStatus.WinnerStatus)===undefined)){
 
                     cacheDom.printOut(playStatus.WinnerStatus,playStatus.mark);
+                    return;
+                    // console.log(  cacheDom.printOut(playStatus.WinnerStatus,playStatus.mark))
                     
                    
                    }
@@ -141,7 +143,7 @@ let Engange=function(row,column){
                 else if(positonsFilled>8){
 
                     cacheDom.printOut("Its A Tie");
-                    
+                    return;
                 }
 
             }
@@ -242,7 +244,7 @@ return {Engange,DertimineWinner}
 
 
 let cacheDom=(()=>{
-//move this to Move obj
+
 let positionButton=(row,column,button)=>{
 
     let getCordinates=()=>{
@@ -302,7 +304,7 @@ function ManipulateSquare(row,column,square){
 
 let result=(()=>{
 
-    let dialog=document.querySelector('dialog');
+    let dialog=document.querySelector('#endGame');
     let collectButton=document.querySelectorAll('#square');
 
     
@@ -319,16 +321,21 @@ let result=(()=>{
     return{dialog};
     })();
 
-
-function printOut(words,mark) {
+let xWins=0;
+let oWins=0;
+function printOut(words,spot=undefined) {
      
     
     let text=document.querySelector('p');
     result.dialog.showModal();
     text.textContent=words;
-
-   
-
+    //points sent to array
+    if (spot==="X") {
+        xWins++;
+    }
+    else if(spot==="O"){
+        oWins++;
+    }
 
 }
 
@@ -342,6 +349,24 @@ function cleanUp(buttons){
 
 }
 
+function Quit() {
+    let finishbox=document.querySelector('#finishBox');
+    let pointsPlayerX=document.querySelector('#finishBox div:first-child>p')
+    let pointsPlayerO=document.querySelector('#finishBox div:last-child>p')
+    finishbox.showModal();
+    pointsPlayerX.textContent=xWins;
+    pointsPlayerO.textContent=oWins;
+}
+
+let quit=document.querySelector('#endGame button:first-child');
+
+quit.addEventListener('click',(e)=>{
+
+    Quit();
+})
+
+
+
 
 
 return{printOut}
@@ -350,3 +375,4 @@ return{printOut}
 
 
 
+  

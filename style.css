@@ -1,12 +1,19 @@
 
-body{
+  @import url('https://fonts.googleapis.com/css2?family=Marhey:wght@300&display=swap');
 
+
+*{
+
+    font-family: 'Marhey', sans-serif;
+
+}
+body{
 display: flex;
 
 justify-content: center;
 align-items: center;
-height: 98vh;
-
+height: 100vh;
+background-image: url(./background/backdrop.webp);
 width: 98vw;
 background-color: #262c36;
 
@@ -35,6 +42,60 @@ color: white;
     border: 2px solid #576776;
     border-radius: 7px;
     font-weight: 900;
+    
 
+}
+
+dialog{
+
+    background-color: #576776;
+    color: white;
+
+    border-radius: 12px;
+    border: none;
+    box-shadow: 2px 2px 30px rgb(39, 36, 36);
+
+
+}
+
+#endGame>div{
+
+    display: flex;
+    gap: 10px;
+
+}
+#endGame>div button{
+
+    border-radius: 7px;
+    border: none;
+}
+#endGame>div button:first-child{
+
+    background-color:#f53b30 ;
+    color: white;
+
+    
+    
+    
+    }
+#endGame>div button:last-child{
+
+background-color:#47a785 ;
+color: white;
+
+
+
+}
+
+#finishBox{
+
+    width: 90vw;
+    padding:0px 0px 0px 48%;
+    font-size: 18px;
+}
+
+h2{
+
+text-align: center;
 
 }
