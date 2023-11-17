@@ -92,7 +92,7 @@ let RunningPlayer=()=>{
 SwitchPlay();
 
 
-return{SwitchPlay,RunningPlayer}
+return{SwitchPlay,RunningPlayer,User,Computer}
 
     
 })();
@@ -328,15 +328,20 @@ function printOut(words,spot=undefined) {
     
     let text=document.querySelector('p');
     result.dialog.showModal();
-    text.textContent=words;
+  
     //points sent to array
     if (spot==="X") {
+        text.textContent=`Winner is ${Player.User.name}`
         xWins++;
     }
     else if(spot==="O"){
+        text.textContent=`Winner is ${Player.Computer.name}`
         oWins++;
     }
+    else{
 
+        text.textContent=words
+    }
 }
 
 function cleanUp(buttons){
@@ -351,9 +356,15 @@ function cleanUp(buttons){
 
 function Quit() {
     let finishbox=document.querySelector('#finishBox');
-    let pointsPlayerX=document.querySelector('#finishBox div:first-child>p')
-    let pointsPlayerO=document.querySelector('#finishBox div:last-child>p')
+    let pointsPlayerX=document.querySelector('#finishBox div:first-child>p');
+    let pointsPlayerO=document.querySelector('#finishBox div:last-child>p');
     finishbox.showModal();
+
+    let PlayerNameX=document.querySelector('#finishBox div:first-child>h3');
+    let PlayerNameO=document.querySelector('#finishBox div:last-child>h3');
+
+    PlayerNameX.textContent=Player.User.name;
+    PlayerNameO.textContent=Player.Computer.name;
     pointsPlayerX.textContent=xWins;
     pointsPlayerO.textContent=oWins;
 }
@@ -364,6 +375,23 @@ quit.addEventListener('click',(e)=>{
 
     Quit();
 })
+
+let submit=document.querySelector('[type=submit]');
+let XplayerInput=document.querySelector('#PlayerX');
+let OplayerInput=document.querySelector('#PlayerO');
+
+submit.addEventListener('click',(e)=>{
+
+   playerDetails(XplayerInput.value,OplayerInput.value);
+})
+
+function playerDetails(playerX,PlayerO){
+
+Player.User.name=playerX;
+Player.Computer.name=PlayerO;
+
+
+}
 
 
 

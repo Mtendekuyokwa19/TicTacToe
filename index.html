@@ -28,15 +28,30 @@
     <dialog id="finishBox">
       
         <div>
-            <h3>Player X</h3>
+            <h3></h3>
             <p></p>
         </div>
       
         <div>
-            <h3>Player O</h3>
+            <h3></h3>
             <p></p>
         </div>
     </dialog>
     </div>
+
+
+    <dialog id="StartBox"  open>
+        <form action="" method="dialog">
+            <div>
+            <Label for="PlayerX">Player X</Label>
+            <input id="PlayerX" type="text" minlength="2" placeholder="Linus Trovalds" required>
+        </div>
+        <div>
+            <Label for="PlayerO">Player O</Label>
+            <input id="PlayerO" type="text" minlength="2" placeholder="Tim Cook" required>
+        </div>
+            <button type="submit">Lets Play</button>
+        </form>
+    </dialog>
 </body>
 </html>

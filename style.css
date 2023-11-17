@@ -40,7 +40,8 @@ color: white;
     font-size: 56px;
     outline: none;
     border: 2px solid #576776;
-    border-radius: 7px;
+    
+
     font-weight: 900;
     
 
@@ -58,16 +59,25 @@ dialog{
 
 }
 
+#endGame{
+
+font-weight: bold;
+font-size: 30px;
+
+}
+
 #endGame>div{
 
     display: flex;
     gap: 10px;
-
+    height: 30px;
+    justify-content: center;
 }
 #endGame>div button{
 
     border-radius: 7px;
     border: none;
+    width: 90px;
 }
 #endGame>div button:first-child{
 
@@ -98,4 +108,57 @@ h2{
 
 text-align: center;
 
+}
+
+#StartBox{
+
+    height: 160px;
+    width: 230px;
+  
+
+
+}
+
+form{
+
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    justify-content: center;
+    align-items: center;
+}
+
+[type="submit"]{
+
+    background-color:#47a785 ;
+    color: white;
+    border: none;
+ 
+    height: 30px;
+    border-radius: 8px;
+    width: 90px;
+    font-size: 16px;
+    font-weight: bold;
+
+  
+   
+
+
+
+}
+form div{
+
+    display: flex;
+    flex-direction: column;
+    gap:7px;
+
+
+}
+form div>input{
+
+    flex-grow: 1;
+    border-radius: 6px;
+    padding: 3px 10px ;
+    border: none;
+    
 }
