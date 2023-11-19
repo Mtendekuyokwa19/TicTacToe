@@ -270,7 +270,7 @@ let setMaker=(()=>{
                 square.id="square";
                 box.append(square);
                 square.textContent="   ";
-                square.disabled=0;
+                square.disabled=1;
                 let value=positionButton(i,x,square);
                 
                 square.addEventListener('click',(e)=>{
@@ -383,6 +383,7 @@ let OplayerInput=document.querySelector('#PlayerO');
 submit.addEventListener('click',(e)=>{
 
    playerDetails(XplayerInput.value,OplayerInput.value);
+   switchon();
 })
 
 function playerDetails(playerX,PlayerO){
@@ -393,7 +394,16 @@ Player.Computer.name=PlayerO;
 
 }
 
+function switchon() {
 
+    let allClicks=document.querySelectorAll('#square');
+
+    allClicks.forEach(allClicks=>{
+
+        allClicks.disabled=0;
+    })
+    
+}
 
 
 
